@@ -136,7 +136,7 @@ MEDIA_ROOT = BASE_DIR /'media'
 AUTH_USER_MODEL = "Form.Formulaire"
 
 # Email configuration
-EMAIL_BACKEND = config('EMAIL8=_BACKEND')
+EMAIL_BACKEND = config('EMAIL_BACKEND')
 EMAIL_HOST = config('EMAIL_HOST')
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
