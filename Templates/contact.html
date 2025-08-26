@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contactez-nous</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f8f8f8;
+            padding: 20px;
+        }
+        p{
+            font-weight: 900;
+            font-size: larger;
+            
+        }
+        form {
+            background: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            width: 100%;
+            max-width: 600px;
+            margin: auto;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        label {
+            color: orange;
+            font-weight: bold;
+        }
+        button {
+            background: orange;
+            color: white;
+            border: none;
+            padding: 10px;
+            cursor: pointer;
+            margin-top: 10px;
+            border-radius: 5px;
+        }
+        button:hover {
+            background: darkorange;
+        }
+    </style>
+</head>
+<body>
+    <h1 style="color:blue; text-align:center;">FORMULAIRE DE CONTACT</h1>
+    <form method="post">
+       {% for message in messages %}
+            <p>{{ message }}</p>
+        {% endfor %}
+          
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Envoyer</button>
+    </form>
+</body>
+</html>

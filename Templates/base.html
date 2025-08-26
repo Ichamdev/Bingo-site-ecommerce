@@ -1,0 +1,100 @@
+{% load static %}
+<!DOCTYPE html><html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BINGO - Tous les articles</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+    <header>
+
+        <svg id="menu-toggle" xmlns="http://www.w3.org/2000/svg" width="14" height="16" fill="currentColor" class="bi bi-list" viewBox="0 0 16 16">
+             <path fill-rule="evenodd" d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5"/>
+        </svg> 
+         <a href="{% url 'index' %}"><div class="logo">BINGO</div></a>
+        <div class="top-bar-icons">
+        <form class="search" action="{% url 'rechercher' %}" method="post">
+           {% csrf_token %}
+           <input type="text" placeholder="Rechercher un produit" id="search-input" name="rechercher">
+           <button type="submit" id="search-button">🔍</button>
+       </form>
+        </div>
+        
+        {% if user.is_authenticated %}
+            <div> <a href="{% url 'cart' %}">🛒({{ user.cart.orders.count }})</a></div>
+            <div class="profil">👤<br>{{user.username}}</div>
+            <div><a href="{% url 'logout_user' %}">Deconnexion</a></div>
+         
+        {% else %}
+            <a href="{% url 'login_user' %}">Connectez-vous</a>
+        {% endif %}
+        
+    </header>
+        
+<nav id="menu" class="hidden">
+          
+
+    {% block nav %}
+            
+               
+
+       
+    {% endblock%}
+</nav>
+{% block contenu %}
+
+{% endblock %}
+<footer>
+    <div>
+        <h2>A PROPOS DE NOUS </h2>
+        <ul class="footer_ul">
+            <li><a href="{% url 'quisommesnous' %}">Qui sommes-nous</a></li>
+            <li><a href="{% url 'conditions_generales' %}">Conditions Generales </a></li>
+            <li><a href="{% url 'termes' %}">Termes et confidentialités</a></li>
+        </ul>
+    </div>
+     <div>
+           <h2 style="margin-left: 50px;">CATEGORIES</h2>
+        <ul class="footer_ul">
+           {% block categories %}
+
+           {% endblock %}
+        </ul>
+    </div>
+     <div>
+        <h2>BESOIN D'AIDE?</h2>
+        <ul class="footer_ul">
+            <li><a href="{% url 'contact' %}">Contactez-nous</a></li>
+            <li><a href="{% url 'contact' %}">Aide & FAQ</a></li>
+        </ul>
+    </div>
+</footer>
+<style>
+    header .profil{
+        font-weight: 900;
+        font-size: 15px;
+    }
+    #search-button{
+        background-color: white;
+        border: none;
+        cursor: pointer;
+    }
+
+         @media (max-width:900px){
+           input{
+            width: 30px;
+           }
+           form button {
+            opacity: 0;
+           }
+           header a {
+            font-size: 10px;
+           }
+
+            }
+</style>
+<script src="{% static 'JavaScript/scripts.js'%}"></script>
+</body>
+
+</html>

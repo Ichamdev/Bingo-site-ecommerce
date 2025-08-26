@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+{% block nav %}
+<ul>
+    {% for i in categorie %}
+    <li><a href="{% url 'categorie' i.id %}">{{i.name}}</a></li>
+    {% endfor %}
+</ul>
+{% endblock %}
+{% block contenu %}
+<div class="products">
+    {% if products %}
+        {% for product in products %}
+        <a href="{% url 'detail' product.name %}">
+        <div class="product-card">
+            <img src="{{ product.thumbnail.url }}" alt="Montre Connectée">
+            <div>{{product.name}}</div>
+            <div class="badge best-seller">Best Seller</div>
+            <div class="price">{{product.price}} <span class="old-price">FCFA 20,000</span></div>
+            <div class="discount">62% DE RÉDUCTION</div>
+            <button class="add-button">Ajouter au panier</button>
+        </div>
+         </a>
+       
+    {% endfor %}
+    {%else%}
+    <h3>Nous n'avons pas de produits dans cette categorie</h3>
+    {%endif%}
+
+</div>
+
+<style>
+    .products h3{
+        font-size: 50px;
+        font-weight: 900;
+        margin: 20px;
+    }
+</style>
+{% endblock %}
+
+{% block categories %}
+    {% for category in categorie %}
+        <li><a href="{% url 'categorie' category.id %}">{{ category.name }}</a></li>
+    {% endfor %}
+{% endblock %}

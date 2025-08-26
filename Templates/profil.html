@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div>
+        <button> <a href="">Ajouter un produit</a>  </button>
+    </div>
+    <div class="products">
+   {% for product in products %}
+    <a href="{% url 'detail' product.name %}">
+    <div class="product-card">
+        <img src="{{ product.thumbnail.url }}" alt="Montre Connectée">
+        <div>{{product.name}}</div>
+        <div class="badge best-seller">Best Seller</div>
+        <div class="price">{{product.price}} <span class="old-price">FCFA 20,000</span></div>
+        <div class="discount">62% DE RÉDUCTION</div>
+        <button class="add-button">supprimer</button>
+    </div>
+    </a>
+       
+    {% endfor %}
+    </div>
+ 
+
+    <style>
+        .products {
+            display: flex;
+            grid-template-columns: 1fr 1fr;
+            gap: 5px;
+            padding:10px;
+            margin: 10px;
+        }
+        .product-card {
+            background-color: white;
+            border-radius: 10px;
+            padding: 10px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 170px;
+        }
+        .product-card div{
+            font-size: 13px;
+        }
+        
+        .product-card img {
+            width: 120px;
+            height: auto;
+            border-radius: 10px;
+        }
+        .product-card img:hover{
+            width: 100px;
+        }
+        .badge {
+            font-size: 12px;
+            padding: 3px 6px;
+            border-radius: 5px;
+            margin: 5px 0;
+        }
+        .best-seller { 
+            background-color: #d4f7dc; 
+            color: #2b7a3b;
+            font-size: 10px;
+         }
+        .top-selling { background-color: #ffe5b4; color: #d98400; font-size: 10px; }
+        .price {
+            font-weight: bold;
+            color: #f60;
+        }
+        .old-price {
+            text-decoration: line-through;
+            color: #999;
+            font-size: 12px;
+        }
+        .discount {
+            font-size: 12px;
+            color: #f60;
+            margin-bottom: 5px;
+        }
+        .add-button {
+            background-color: #e0e0ff;
+            color: #333;
+            padding: 8px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            width: 100%;
+        }
+        .add-button:hover{
+            font-weight: bold;
+            color: blue;
+            font-size: 16px;
+
+            }
+    </style>
+</body>
+</html>

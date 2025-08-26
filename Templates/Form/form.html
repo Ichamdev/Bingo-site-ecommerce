@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Formulaire coloré</title>
+ <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  
+  <form class="formulaire" method="post">
+    {% csrf_token %}
+    <h2>Creer un compte</h2>
+
+    <label for="nom">Nom d'utilisateur :</label>
+    <input type="text" id="nom" name="username" >
+
+    <label for="email">Email :</label>
+    <input type="email" id="email" name="email">
+
+    <label for="motdepasse">Mot de passe :</label>
+    <input type="password" id="motdepasse" name="password">
+
+    <input type="submit" value="S'incrire">
+    
+  </form>
+<style>
+  .formulaire {
+      background-color: #ffffff;
+      padding: 30px;
+      border-radius: 15px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+      
+    }
+
+    .formulaire h2 {
+      text-align: center;
+      color: blue; /* Orange */
+      margin-bottom:20px;
+      font-weight: 800;
+      font-size: 50px;
+
+    }
+
+    .formulaire label {
+      display: block;
+      margin-bottom: 5px;
+      color: #003366; /* Bleu foncé */
+    }
+
+    .formulaire input[type="text"],
+    .formulaire input[type="email"],
+    .formulaire input[type="password"] {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 15px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+    }
+
+    .formulaire input[type="submit"] {
+      width: 100%;
+      background-color: #ff6600; /* Orange */
+      color: white;
+      padding: 10px;
+      border: none;
+      border-radius: 8px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    .formulaire input[type="submit"]:hover {
+      background-color: #e65c00; /* Orange foncé */
+    }
+    .formulaire a {
+        display: flex;
+        justify-content: center;
+        font-size: 14px;
+        text-decoration: none;
+        color: blue;
+        font-weight: 800;
+         }
+
+    .formulaire a:hover {
+        font-size: 20px;
+    }
+
+        
+</style>
+</body>
+</html>

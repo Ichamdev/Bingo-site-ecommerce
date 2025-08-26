@@ -1,0 +1,122 @@
+{% extends 'base.html' %}
+{% block nav %}
+<ul>
+    {% for i in categorie %}
+    <li><a href="{% url 'categorie' i.id %}">{{i.name}}</a></li>
+    {% endfor %}
+</ul>
+{% endblock %}
+{% block contenu %}
+{% if orders %}
+<button class="paiement"><a href="{% url 'livraison' %}">Commandez</a></button>
+{%endif%}
+ {% for order in orders %}
+    <div class = 'cart_product'>
+        <aside>
+        <img src="{{order.product.thumbnail.url}}" alt="{{order.product.name}}">
+        
+        <p>Quantité: {{order.quantity}}</p> <form action="{% url 'update_cart' order.id %}"  method = 'post'>
+            {% csrf_token %}
+           <input type="number" name="quantity" placeholder=" Quantité" min="1"><br><button type="submit">Mettre à jour</button>
+        </form>
+        </aside>
+        <div class="presentation">
+            <h2>{{order.product.name}}</h2>
+            {{order.product.description}}
+        </div>
+    </div>
+        
+    <button class="clear" type="submit"> <a href="{% url 'delete_cart' order.id %}">Supprimer</a></button>
+        
+    {% endfor %}
+
+
+<style>
+* {
+  font-family: "Forum", serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
+
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background-color: #f5f5f5;
+}
+
+.paiement{
+    float: right;
+    margin: 10px;
+
+}
+.paiement a {
+    text-decoration: none;
+    font-size: 18px;
+    font-weight: 800;
+    color: white;
+}
+    .cart_product{
+        display: flex;
+        width: 80%;
+        margin: 10px;
+    }
+    .clear{
+        margin-left: 50px;
+    }
+    .clear a{
+        color: white;
+        font-weight: 700;
+        background-color: orange;
+        font-size: 10 px;
+        text-decoration: none;
+    }
+    aside img {
+        width: 190px;
+    }
+    .presentation{
+        margin: 10px;
+    }
+    .presentation h2{
+        font-size: 35px;
+        font-weight: 900;
+        color:orange;
+    }
+
+    form {
+        margin-left: 15px;
+        margin-top:5px ;
+    }
+    form input{
+        width: 50px;
+    }
+    button {
+        color: white;
+        font-weight: 700;
+        background-color: orange;
+        font-size: 15px;
+    }
+    @media (max-width:900px){
+            .cart_product{
+                display: block;
+            }
+            .presentation h2{
+                font-size: 25px;
+            }
+           .cart_product form button{
+            background-color: blue;
+           }
+          
+            }
+
+</style>
+    
+{% endblock %}
+
+
+
+{% block categories %}
+{% for category in categorie %}
+    <li><a href="{% url 'categorie' category.id %}">{{category.name }}</a></li>
+{% endfor %}
+{% endblock %}

@@ -1,0 +1,64 @@
+{% extends 'base.html' %}
+{% block nav %}
+<ul>
+    {% for i in categorie %}
+    <li><a href="">{{i.name}}</a></li>
+    {% endfor %}
+</ul>
+{% endblock %}
+{% block contenu %}
+    <div class="product-card">
+        <img src="{{ product.thumbnail.url }}" alt="Montre Connectée" style="width=400px">
+        <div>{{product.name}}</div>
+        <div class="price">{{product.price}} <span class="old-price">FCFA 20,000</span></div>
+        <button class="add-button"><a href="{% url 'add_to_card' product.name %}">Ajouter au panier</a></button>
+        <h3>Quantité disponible:{{product.stock}}</h3>
+        <p>{{product.description}}</p>
+       
+    </div>
+
+
+    <style>
+        .product-card {
+            width: 98%;
+        }
+        .product-card div {
+           font-size: 40px;
+        }
+        .product-card h3 {
+            color: blue;
+            font-size: 30px;
+        }
+        .product-card button{
+            width: 150px;
+        }
+        .product-card p {
+            font-size: 20px;
+            font-weight: 300;
+        }
+        @media (max-width:900px){
+           .product-card img {
+            width: 190px;
+           }
+
+           .product-card div {
+            font-size: 20px;
+           }
+           .product-card p {
+            font-size: 15px;
+           }
+           
+          
+            }
+
+    </style>
+
+{% endblock %}
+
+{% block categories %}
+    
+{% for category in categorie %}
+            <li><a href="{% url 'categorie' category.id %}">{{ category.name }}</a></li>
+    {% endfor %}
+    
+{% endblock %}
