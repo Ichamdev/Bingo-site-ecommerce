@@ -55,19 +55,20 @@ def cart(request):
     categorie = Categories.objects.all()
     return render(request,'cart.html',context={"orders":cart.orders.all() ,"categorie":categorie })
 
-def add_to_card(request,name):
-    user = request.user
-    product = get_object_or_404(Products,name=name)
-    cart, _ = Cart.objects.get_or_create(user=user)
-    if not user:
-        return redirect('login_user')
-    order , created =Order.objects.get_or_create(user=user,ordered = False , product=product)
-    if created:
-        cart.orders.add(order)
-        cart.save()
+def add_to_cart(request,name):
+    if request.user.is_authenticated:
+        user = request.user
+        product = get_object_or_404(Products,name=name)
+        cart, _ = Cart.objects.get_or_create(user=user)
+        order , created =Order.objects.get_or_create(user=user,ordered = False , product=product)
+        if created:
+            cart.orders.add(order)
+            cart.save()
+        else:
+            order.quantity+=1
+            order.save()
     else:
-        order.quantity+=1
-        order.save()
+        return redirect('login_user')
     # return redirect(reverse("detail", kwargs={'name':name}))
     return redirect('cart')
 
