@@ -59,7 +59,7 @@ def add_to_card(request,name):
     user = request.user
     product = get_object_or_404(Products,name=name)
     cart, _ = Cart.objects.get_or_create(user=user)
-    if not user.is_authenticated:
+    if not user:
         return redirect('login_user')
     order , created =Order.objects.get_or_create(user=user,ordered = False , product=product)
     if created:
