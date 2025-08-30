@@ -11,7 +11,7 @@
     {% for product in products %}
     <a href="{% url 'detail' product.name %}">
     <div class="product-card">
-        <img src="{{ product.thumbnail.url }}" alt="Montre Connectée">
+        <img src="{{ product.thumbnail.url }}" alt="{{product.name}}">
         <div>{{product.name}}</div>
         <div class="badge best-seller">Best Seller</div>
         <div class="price" style="font-size: 25px;">{{product.price}} FCFA</div>

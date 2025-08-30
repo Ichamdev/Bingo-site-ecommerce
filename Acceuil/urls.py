@@ -15,7 +15,7 @@ urlpatterns = [
     path('livraison/', livraison_view, name='livraison'),
     path('<int:id>/',categori,name='categorie'),
     path('<str:name>/',detail,name='detail'),
-    path('<str:name>/add_to_cart/',add_to_card,name='add_to_card'),
+    path('<str:name>/add_to_card/',add_to_card,name='add_to_card'),
     # path('profil',users,name='profil'),
  
 ]

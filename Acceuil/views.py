@@ -53,13 +53,14 @@ def rechercher (request):
 def cart(request):
     cart = get_object_or_404(Cart , user = request.user)
     categorie = Categories.objects.all()
-    return render(request,'cart.html',context={"orders":cart.orders.all() ,"categorie":categorie})
-
+    return render(request,'cart.html',context={"orders":cart.orders.all() ,"categorie":categorie })
 
 def add_to_card(request,name):
     user = request.user
     product = get_object_or_404(Products,name=name)
     cart, _ = Cart.objects.get_or_create(user=user)
+    if not user.is_authenticated:
+        return redirect('login_user')
     order , created =Order.objects.get_or_create(user=user,ordered = False , product=product)
     if created:
         cart.orders.add(order)
