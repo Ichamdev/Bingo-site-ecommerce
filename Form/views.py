@@ -12,7 +12,7 @@ def signup(request):
         login(request,user)
         return redirect('index')
 
-    return render(request,'form/form.html')
+    return render(request,'Form/form.html')
 
 
 def logout_user(request):
@@ -31,7 +31,7 @@ def login_user(request):
          else:
              messages.info(request,'Identifiant et mot de passe incorrect')
 
-    return render(request,'form/login.html')
+    return render(request,'Form/login.html')
 
 
 
